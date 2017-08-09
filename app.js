@@ -14,10 +14,12 @@ const argv = yargs
     .alias('help','h')
     .argv;
 
-console.log(argv);
+console.log('command : '+argv);
+var AddressEncode = encodeURIComponent(argv.a)
+console.log('AddressEncode : '+AddressEncode)
 
 request({
-    url : 'https://maps.googleapis.com/maps/api/geocode/json?address=1301%20lombard%20street%20philadelphia',
+    url : 'https://maps.googleapis.com/maps/api/geocode/json?address='+AddressEncode,
     json : true
 },(error, response, body) => {
     console.log('address : '+body.results[0].formatted_address);
