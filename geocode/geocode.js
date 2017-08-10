@@ -1,4 +1,5 @@
 const request = require('request');
+var keyDarkSky = '4927e482f8e7046dd921ba7553fff9eb'
 
 var geocodeAddress = (address,callback) =>  {
     var addressEncode = encodeURIComponent(address);
@@ -26,7 +27,26 @@ var geocodeAddress = (address,callback) =>  {
 };
 
 var geocodeTemp = (results,callback) => {
-
+    var url = 'https://api.darksky.net/forecast/'+keyDarkSky+'/'+results.latitude+','+results.longitude;
+    console.log('url : '+url);
+    request({
+        url,
+        json : true
+    },(error, response, body) => {
+        if(error){
+            callback('Unable to connnect to forecast Servers.');
+        }else if(body){
+            if(body.code == '400'){
+                callback(body.error);
+            }else if(body.currently){
+                callback(undefined,{
+                    temperature : body.currently.temperature
+                })
+            }
+        }else{
+            callback('UnKnown Error from forecast.');
+        }
+    });
 };
 
 module.exports = {

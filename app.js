@@ -17,12 +17,15 @@ const argv = yargs
 
 geocode.geocodeAddress(argv.a, (errorMassage,results) => {
     if(errorMassage){
-        console.log(errorMassage);
+        console.log('Google Error'+errorMassage);
     }else{
         console.log(JSON.stringify(results,undefined,2));
-        geocode.geo(results);
+        geocode.geocodeTemp(results,(errorMassage,results) => {
+            if(errorMassage){
+                console.log('Forecast error'+errorMassage);
+            }else{
+                console.log(JSON.stringify(results,undefined,2));
+            }
+        });
     }
 });
-
-//4927e482f8e7046dd921ba7553fff9eb
-//https://api.darksky.net/forecast/[key]/[latitude],[longitude]
