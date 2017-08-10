@@ -17,12 +17,12 @@ const argv = yargs
 
 geocode.geocodeAddress(argv.a, (errorMassage,results) => {
     if(errorMassage){
-        console.log('Google Error'+errorMassage);
+        console.log('Google Error : '+errorMassage);
     }else{
         console.log(JSON.stringify(results,undefined,2));
         geocode.geocodeTemp(results.latitude,results.longitude,(errorMassage,results) => {
             if(errorMassage){
-                console.log('Forecast error'+errorMassage);
+                console.log('Forecast error : '+errorMassage);
             }else{
                 console.log(JSON.stringify(results,undefined,2));
             }
