@@ -4,8 +4,10 @@ var keyDarkSky = '4927e482f8e7046dd921ba7553fff9eb'
 var geocodeAddress = (address,callback) =>  {
     var addressEncode = encodeURIComponent(address);
     console.log('AddressEncode : '+addressEncode);
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+addressEncode;
+    console.log(url);
     request({
-        url : 'https://maps.googleapis.com/maps/api/geocode/json?address='+addressEncode,
+        url,
         json : true
     },(error, response, body) => {
         if(error){
@@ -41,7 +43,9 @@ var geocodeTemp = (latitude,longitude,callback) => {
             }else if(body.currently){
                 callback(undefined,{
                     temperature_F : body.currently.temperature,
-                    temperature_C : parseFloat(((body.currently.temperature-32)*(5/9)).toFixed(2))
+                    temperature_C : parseFloat(((body.currently.temperature-32)*(5/9)).toFixed(2)),
+                    apparentTemperature_F : body.currently.apparentTemperature,
+                    apparentTemperature_C : parseFloat(((body.currently.apparentTemperature-32)*(5/9)).toFixed(2))
                 })
             }
         }else{
