@@ -25,6 +25,11 @@ var geocodeAddress = (address,callback) =>  {
     });
 };
 
+var geocodeTemp = (results,callback) => {
+
+};
+
 module.exports = {
-    geocodeAddress
+    geocodeAddress,
+    geocodeTemp
 }

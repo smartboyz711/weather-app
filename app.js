@@ -20,5 +20,9 @@ geocode.geocodeAddress(argv.a, (errorMassage,results) => {
         console.log(errorMassage);
     }else{
         console.log(JSON.stringify(results,undefined,2));
+        geocode.geo(results);
     }
 });
+
+//4927e482f8e7046dd921ba7553fff9eb
+//https://api.darksky.net/forecast/[key]/[latitude],[longitude]
