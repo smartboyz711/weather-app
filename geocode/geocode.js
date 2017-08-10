@@ -26,8 +26,8 @@ var geocodeAddress = (address,callback) =>  {
     });
 };
 
-var geocodeTemp = (results,callback) => {
-    var url = 'https://api.darksky.net/forecast/'+keyDarkSky+'/'+results.latitude+','+results.longitude;
+var geocodeTemp = (latitude,longitude,callback) => {
+    var url = 'https://api.darksky.net/forecast/'+keyDarkSky+'/'+latitude+','+longitude;
     console.log('url : '+url);
     request({
         url,
@@ -40,7 +40,8 @@ var geocodeTemp = (results,callback) => {
                 callback(body.error);
             }else if(body.currently){
                 callback(undefined,{
-                    temperature : body.currently.temperature
+                    temperature_F : body.currently.temperature,
+                    temperature_C : parseFloat(((body.currently.temperature-32)*(5/9)).toFixed(2))
                 })
             }
         }else{

@@ -20,7 +20,7 @@ geocode.geocodeAddress(argv.a, (errorMassage,results) => {
         console.log('Google Error'+errorMassage);
     }else{
         console.log(JSON.stringify(results,undefined,2));
-        geocode.geocodeTemp(results,(errorMassage,results) => {
+        geocode.geocodeTemp(results.latitude,results.longitude,(errorMassage,results) => {
             if(errorMassage){
                 console.log('Forecast error'+errorMassage);
             }else{
