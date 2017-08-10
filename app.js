@@ -20,7 +20,7 @@ var AddressEncode = encodeURIComponent(argv.a);
 console.log('AddressEncode : '+AddressEncode);
 
 request({
-    url : 'https://maps.googleapi.com/maps/api/geocode/json?address='+AddressEncode,
+    url : 'https://maps.googleapis.com/maps/api/geocode/json?address='+AddressEncode,
     json : true
 },(error, response, body) => {
     if(body){
