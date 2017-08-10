@@ -43,9 +43,9 @@ var geocodeTemp = (latitude,longitude,callback) => {
             }else if(body.currently){
                 callback(undefined,{
                     temperature_F : body.currently.temperature,
-                    temperature_C : parseFloat(((body.currently.temperature-32)*(5/9)).toFixed(2)),
+                    temperature_C : changeFtoC(body.currently.temperature),
                     apparentTemperature_F : body.currently.apparentTemperature,
-                    apparentTemperature_C : parseFloat(((body.currently.apparentTemperature-32)*(5/9)).toFixed(2))
+                    apparentTemperature_C : changeFtoC(body.currently.apparentTemperature)
                 })
             }
         }else{
@@ -53,6 +53,10 @@ var geocodeTemp = (latitude,longitude,callback) => {
         }
     });
 };
+
+var changeFtoC = (temperature_F) => {
+    return parseFloat(((temperature_F-32)*(5/9)).toFixed(2))
+}
 
 module.exports = {
     geocodeAddress,
