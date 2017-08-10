@@ -1,5 +1,6 @@
 const request = require('request');
 const yargs = require('yargs');
+var _ = require('lodash');
 
 const argv = yargs
     .options({
@@ -15,14 +16,18 @@ const argv = yargs
     .argv;
 
 console.log('command : '+argv);
-var AddressEncode = encodeURIComponent(argv.a)
-console.log('AddressEncode : '+AddressEncode)
+var AddressEncode = encodeURIComponent(argv.a);
+console.log('AddressEncode : '+AddressEncode);
 
 request({
-    url : 'https://maps.googleapis.com/maps/api/geocode/json?address='+AddressEncode,
+    url : 'https://maps.googleapi.com/maps/api/geocode/json?address='+AddressEncode,
     json : true
 },(error, response, body) => {
-    console.log('address : '+body.results[0].formatted_address);
-    console.log('lat : '+body.results[0].geometry.location.lat);
-    console.log('lng : '+body.results[0].geometry.location.lng);
-})
+    if(body){
+        console.log('address : '+body.results[0].formatted_address);
+        console.log('lat : '+body.results[0].geometry.location.lat);
+        console.log('lng : '+body.results[0].geometry.location.lng);
+    }else{
+        console.log('error : '+error);
+    }
+});
