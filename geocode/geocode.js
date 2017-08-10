@@ -1,6 +1,6 @@
 const request = require('request');
 
-var geocodeAddress = (address) =>  {
+var geocodeAddress = (address,callback) =>  {
     var addressEncode = encodeURIComponent(address);
     console.log('AddressEncode : '+addressEncode);
     request({
@@ -8,17 +8,19 @@ var geocodeAddress = (address) =>  {
         json : true
     },(error, response, body) => {
         if(error){
-            console.log('Unable to connnect to Google Servers.');
+            callback('Unable to connnect to Google Servers.');
         }else if(body){
             if(body.status == 'ZERO_RESULTS'){
-                console.log('Unable to find your addresss.');
+                callback('Unable to find your addresss.');
             }else if(body.status == 'OK'){
-                console.log('address : '+body.results[0].formatted_address);
-                console.log('lat : '+body.results[0].geometry.location.lat);
-                console.log('lng : '+body.results[0].geometry.location.lng);
+                callback(undefined,{
+                    address : body.results[0].formatted_address,
+                    latitude : body.results[0].geometry.location.lat,
+                    longitude : body.results[0].geometry.location.lng
+                })
             }
         }else{
-            console.log('UnKnown Error from Google Api.');
+            callback('UnKnown Error from Google Api.');
         }
     });
 };
