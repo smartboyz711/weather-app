@@ -28,6 +28,6 @@ request({
         console.log('lat : '+body.results[0].geometry.location.lat);
         console.log('lng : '+body.results[0].geometry.location.lng);
     }else{
-        console.log('error : '+error);
+        console.log(error);
     }
 });
