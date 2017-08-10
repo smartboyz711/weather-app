@@ -15,7 +15,7 @@ const argv = yargs
     .alias('help','h')
     .argv;
 
-var results = geocode.geocodeAddress(argv.a, (errorMassage,results) => {
+geocode.geocodeAddress(argv.a, (errorMassage,results) => {
     if(errorMassage){
         console.log(errorMassage);
     }else{
