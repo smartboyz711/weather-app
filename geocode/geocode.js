@@ -1,5 +1,5 @@
 const request = require('request');
-var keyDarkSky = '4927e482f8e7046dd921ba7553fff9eb'
+var keyDarkSky = '4927e482f8e7046dd921ba7553fff9eb';
 
 var geocodeAddress = (address,callback) =>  {
     var addressEncode = encodeURIComponent(address);
@@ -46,7 +46,7 @@ var geocodeTemp = (latitude,longitude,callback) => {
                     temperature_C : changeFtoC(body.currently.temperature),
                     apparentTemperature_F : body.currently.apparentTemperature,
                     apparentTemperature_C : changeFtoC(body.currently.apparentTemperature)
-                })
+                });
             }
         }else{
             callback('UnKnown Error from forecast.');
@@ -60,5 +60,6 @@ var changeFtoC = (temperature_F) => {
 
 module.exports = {
     geocodeAddress,
-    geocodeTemp
+    geocodeTemp,
+    changeFtoC
 }

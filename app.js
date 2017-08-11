@@ -1,5 +1,4 @@
 const yargs = require('yargs');
-var _ = require('lodash');
 const geocode = require('./geocode/geocode')
 
 const argv = yargs
